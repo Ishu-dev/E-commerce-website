@@ -1,0 +1,11 @@
+--save-dev use only in development not in production
+--save used in both
+
+ An environment variable is a dynamic-named value that is typically
+ used to provide the ability to configure the value into the code anonymously from outside.
+
+ 18. -> learn codes for different errors like
+400 = badrequest
+405 = method not allowed etc 
+
+25. make notes
