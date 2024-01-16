@@ -221,8 +221,51 @@ utils->apiFilters.js
 27.-------create user model---------
 models->users.js
 
-28.-------encrypting password while registring
+28.-------encrypting password while registring------------
 controllers -> authControllers.js
 routes -> auth.js
+    app.js ->  import authRoutes from "./routes/auth.js";
+    app.use("/api/v1", authRoutes);
+models->user.js (encrupting password)
+install npm i bcryptjs --save
+// bcryptjs helps to encrypt the password
+user.js ->userSchema.pre("save", async function (next))
+used mongoose "pre" function which states that before saving the new user, simply run the inside function
+now enter a new user in postman, we see in monodb compass that our password is encrypted
+
+29.--------generate json web token (JSW)------
+jsw token used in authentication, we generate a token which is a random string in which we store user id 
+or any user data.then we assign that token to user, if the user is authorized. then we assign a expiry to the token.
+then we validate the user or authorize the user based on that token, once the token is expired, 
+we ask the user to login again
+terminal -> npm i jsonwebtoken --save
+models->user.js -> userSchema.methods.getJWTToken =function()
+config->config.env -> 
+    JWT_SECRET=    //random string input karo
+    JWT_EXPIRES_TIME=7d
+controllers->authControllers.js -> const token = user.getJWTToken();
+//now in postman save the {{DOMAIN}}/api/v1/register as Register user
+when we add a new user, we get a token in response. we copy that token response and go to jwt.io.
+there we paste the token and we can see the gap of 7 days in when we hover over it.
+
+30. --------Login User and assign token-----------
+controllers->authControllers.js-> 
+export const loginUser 
+check password is correct-> const isPasswordMatched = await user.comparePassword(password)
+model->users.js -> userSchema.methods.comparePassword = async function(enteredPassword)
+routes->auth.js -> 
+
+31. ---------Sending JWT token in cookie------------
+createing a funvtion that will assign the token and save that token in cookie.
+http only cookie-> can be accessed only from server side, can not be accessed from client side.
+we have to save the token to check before each request that it is autheniticated or not, for that we have to save token
+best way is http only cookie because that can not be accessed from frontend, only through backend
+utils-> sendToken.js ->
+config-> config.env-> COOKIE_EXPIRES_TIME=7
+controllers->authControllers.js-> sendToken(user, 201, res); in login and register 
+
+
+
+
 
 
