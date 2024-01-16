@@ -263,3 +263,5 @@ let filteredProductsCount = products.length;
     middleware->auth.js
     install cookie parser -> npm i cookie-parser --save
     app.js->import cookieParser
+
+33. 
