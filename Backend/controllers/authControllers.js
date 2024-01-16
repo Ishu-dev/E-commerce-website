@@ -51,6 +51,13 @@ export const loginUser = catchAsyncErrors(async (req, res, next) => {
   //   token, //user for authenticating the user
   // });
 
-  sendToken(user, 201, res);
+  sendToken(user, 200, res);
 
+});
+
+
+// Logout user   =>  /api/v1/logout
+export const logoutUser = catchAsyncErrors(async (req, res, next) => {
+  const { email, password } = req.body;
+  
 });

@@ -1,6 +1,7 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import Product from "../models/product.js";
 import ErrorHandler from "../utils/errorHandler.js";
+// import User from "../models/user.js";
 import APIFilters from "../utils/apiFilters.js";
 
 export const getProducts = catchAsyncErrors(async (req, res) => {
@@ -9,6 +10,9 @@ export const getProducts = catchAsyncErrors(async (req, res) => {
 
   //24 applying filters
   const apiFilters = new APIFilters(Product, req.query).search().filters();
+
+  //32
+  console.log("req?.User", req?.user);
 
   let products = await apiFilters.query;
   let filteredProductsCount = products.length;

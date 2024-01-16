@@ -1,14 +1,15 @@
 import express from "express";
 const app = express();
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import { connectDatabase } from "./config/dbConnect.js";
 import errorMiddleware from "./middlewares/errors.js";
 
 //21 Handle uncaught exceptions
 process.on("uncaughtException", (err) => {
-    console.log(`ERROR: ${err}`);
-    console.log('shutting down due to uncaught exception');
-    process.exit(1);
+  console.log(`ERROR: ${err}`);
+  console.log("shutting down due to uncaught exception");
+  process.exit(1);
 });
 
 dotenv.config({ path: "backend/config/config.env" });
@@ -17,6 +18,7 @@ dotenv.config({ path: "backend/config/config.env" });
 connectDatabase();
 
 app.use(express.json());
+app.use(cookieParser());
 
 //21
 // console.log(hello);

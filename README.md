@@ -263,5 +263,13 @@ let filteredProductsCount = products.length;
     middleware->auth.js
     install cookie parser -> npm i cookie-parser --save
     app.js->import cookieParser
-
-33. 
+    routes->products.js -> router.route("/products").get(isAuthenticatedUser ,getProducts);
+    in postman we send getAllProducts request with no filter ->{ id: '65a4a88ac9fe767e4f646ca9', iat: 1705394740, exp: 1705999540 } id, expiry, creation
+    we need only id, find the user with that id in the database
+    we will set the user in the request so that we can access that in our routes
+    
+33. ------logout user ------
+    we have to remove/clear the cookie
+    set cookie value to null
+    if cookie is not there then user is logged out
+    
